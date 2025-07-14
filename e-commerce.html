@@ -1,0 +1,202 @@
+<html>
+<head>
+  <title>Electro World - E-Commerce</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      background-color: #34495e;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      background-color: #1abc9c;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background-color: #16a085;
+    }
+    section {
+      padding: 20px;
+    }
+    .product {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cart {
+      max-width: 500px;
+      margin: 20px auto;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px #ccc;
+    }
+    #cart p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Electro World - E-Commerce</h1>
+</header>
+
+<nav>
+  <a href="#">Mobile Phones</a>
+  <a href="#">Laptops</a>
+  <a href="#">Headphones</a>
+  <a href="#">Smart Watches</a>
+  <a href="#">Tablets</a>
+  <a href="#">Cameras</a>
+  <a href="#">Televisions</a>
+  <a href="#">Speakers</a>
+  <a href="#">Gaming Consoles</a>
+  <a href="#">Home Appliances</a>
+</nav>
+
+<section>
+  <h2>Top Products</h2>
+
+  <div id="product-list"></div>
+
+  <h2>🛒 Your Cart</h2>
+  <div id="cart">
+    <div id="cart-items"></div>
+    <p><strong>Total:</strong> ₹<span id="total">0</span></p>
+  </div>
+</section>
+
+<script>
+  const products = [
+    {
+      name: "iPhone 14",
+      price: 79999,
+      img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+    },
+    {
+      name: "Dell XPS",
+      price: 95000,
+      img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+    },
+    {
+      name: "Sony Headphones",
+      price: 5499,
+      img: "https://images.unsplash.com/photo-1580894908360-0406e9f16f59"
+    },
+    {
+      name: "Galaxy Watch",
+      price: 11499,
+      img: "https://images.unsplash.com/photo-1598970434795-0c54fe7c0642"
+    },
+    {
+      name: "iPad Pro",
+      price: 85000,
+      img: "https://images.unsplash.com/photo-1510557880182-3d4d3c1b7718"
+    },
+    {
+      name: "Canon DSLR",
+      price: 48000,
+      img: "https://images.unsplash.com/photo-1519183071298-a2962be90b8e"
+    },
+    {
+      name: "LG Smart TV",
+      price: 55000,
+      img: "https://images.unsplash.com/photo-1587049352849-4b3b8e6d0442"
+    },
+    {
+      name: "JBL Speaker",
+      price: 3999,
+      img: "https://images.unsplash.com/photo-1596436889106-be35e843f974"
+    },
+    {
+      name: "PlayStation 5",
+      price: 49999,
+      img: "https://images.unsplash.com/photo-1587202372775-98927f96c4e0"
+    },
+    {
+      name: "Microwave Oven",
+      price: 12999,
+      img: "https://images.unsplash.com/photo-1616627982045-6ac5d6ef5e7c"
+    }
+  ];
+
+  let cart = [];
+
+  function displayProducts() {
+    const productList = document.getElementById("product-list");
+    products.forEach((p, i) => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>₹${p.price}</p>
+        <button onclick="addToCart(${i})">Add to Cart</button>
+      `;
+      productList.appendChild(div);
+    });
+  }
+
+  function addToCart(index) {
+    cart.push(products[index]);
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const totalSpan = document.getElementById("total");
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+      const p = document.createElement("p");
+      p.textContent = `${item.name} - ₹${item.price}`;
+      cartItems.appendChild(p);
+      total += item.price;
+    });
+    totalSpan.textContent = total;
+  }
+
+  displayProducts();
+</script>
+
+</body>
+</html>
